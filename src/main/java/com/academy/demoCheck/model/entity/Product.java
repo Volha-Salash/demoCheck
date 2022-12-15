@@ -29,4 +29,7 @@ public class Product implements Serializable {
 
     @Column(name = "sale")
     private int sale;
+
+    public Product(Integer id, String name, Double price, int sale) {
+    }
 }

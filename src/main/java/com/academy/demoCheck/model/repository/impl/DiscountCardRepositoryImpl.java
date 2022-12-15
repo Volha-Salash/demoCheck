@@ -4,8 +4,8 @@ import com.academy.demoCheck.model.entity.DiscountCard;
 import com.academy.demoCheck.model.repository.interfaces.DiscountCardRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author : Volha Salash
@@ -13,12 +13,7 @@ import java.util.Set;
 @Repository
 public class DiscountCardRepositoryImpl implements DiscountCardRepository {
 
-    private final Set<DiscountCard> discountCards = new HashSet<>();
-
-    @Override
-    public Set<DiscountCard> getDiscountCards() {
-        return discountCards;
-    }
+    private final List<DiscountCard> discountCards = new ArrayList<>();
 
     @Override
     public void addDiscountCard(Integer id, Integer number, Integer discount) {

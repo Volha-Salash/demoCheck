@@ -31,7 +31,9 @@ public class ProductRepositoryImpl implements ProductRepository {
     }
 
     @Override
-    public void addProduct(Product product) {
+    public void addProduct(Integer id, String name, Double price, int sale) {
+        Product product = new Product(id, name, price, sale);
+        product.setId(product.getId());
         products.add(product);
     }
 

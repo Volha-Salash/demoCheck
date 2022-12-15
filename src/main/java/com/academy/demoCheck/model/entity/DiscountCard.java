@@ -1,8 +1,6 @@
 package com.academy.demoCheck.model.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -12,6 +10,7 @@ import java.io.Serializable;
  */
 @Entity
 @Data
+@Getter @Setter
 @Table(name = "discount_card")
 @NoArgsConstructor
 public class DiscountCard implements Serializable {

@@ -1,15 +1,14 @@
 package com.academy.demoCheck.service.impl;
 
-import com.academy.demoCheck.dto.ProductDto;
-import com.academy.demoCheck.mapper.interfaces.ProductMapper;
-import com.academy.demoCheck.model.entity.Product;
-import com.academy.demoCheck.model.repository.interfaces.ProductRepository;
-import com.academy.demoCheck.service.interfaces.ProductService;
+import com.academy.demoCheck.model.repository.impl.ProductRepositoryImpl;
+import com.academy.demoCheck.service.interfaces.ProductReaderService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
-import java.util.Set;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 
 /**
  * @author : Volha Salash
@@ -17,7 +16,32 @@ import java.util.Set;
 @Service
 @Log4j2
 @RequiredArgsConstructor
-public class ProductServiceImpl implements ProductService {
+public class ProductServiceImpl implements ProductReaderService {
+
+    @Override
+    public void read(ProductRepositoryImpl productRepository) {
+            File products = new File("src/main/resources/products");
+            try (Scanner scanner = new Scanner(products)) {
+                while (scanner.hasNextLine()) {
+                    String line = scanner.nextLine();
+                    String[] data = line.split(" ");
+                    Integer id = 1;
+                    String name = data[0];
+                    Double price = Double.parseDouble(data[1]);
+                    int sale = Integer.parseInt(data[2]);
+                    productRepository.addProduct(id, name, price, sale);
+                }
+            } catch (FileNotFoundException e) {
+                System.out.println("FILE NOT FOUND");
+            }
+
+        }
+}
+
+
+
+   /*
+        implements ProductService {
 
     private final ProductMapper productMapper;
 
@@ -45,4 +69,6 @@ public class ProductServiceImpl implements ProductService {
     }
 
 }
+
+    */
 
