@@ -1,18 +1,15 @@
 package com.academy.demoCheck.service.interfaces;
 
-import com.academy.demoCheck.dto.ProductDto;
+import com.academy.demoCheck.model.entity.Product;
 
-import java.util.Set;
+import java.util.List;
 
 /**
  * @author : Volha Salash
  */
 public interface ProductService {
 
-    ProductDto getProduct(Integer id);
+    List<Product> findAll();
 
-    Set<ProductDto> getAllProducts();
-
-    void addProduct(ProductDto productDto);
-
+    Product getById(Integer id);
 }

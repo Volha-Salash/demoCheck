@@ -1,8 +1,8 @@
 CREATE TABLE IF NOT EXISTS product
 (
-    id          INTEGER PRIMARY KEY,
+    id          SERIAL PRIMARY KEY,
     name        VARCHAR(64) UNIQUE NOT NULL,
-    price       DECIMAL,
+    price       NUMERIC,
     sale        INTEGER
 );
 
