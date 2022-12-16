@@ -1,4 +1,4 @@
-package com.academy.demoCheck.dto;
+package com.academy.demoCheck.model.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,12 +14,13 @@ import java.io.Serializable;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class DiscountCardDto implements Serializable {
+public class ProductDto implements Serializable {
 
     private Integer id;
 
-    private String number;
+    private String name;
 
-    private Integer discount;
+    private Double price;
 
+    private int sale;
 }

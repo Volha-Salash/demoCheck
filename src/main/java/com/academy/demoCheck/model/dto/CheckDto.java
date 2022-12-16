@@ -1,4 +1,4 @@
-package com.academy.demoCheck.dto;
+package com.academy.demoCheck.model.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

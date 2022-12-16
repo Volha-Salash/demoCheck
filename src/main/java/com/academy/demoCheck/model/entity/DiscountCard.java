@@ -24,7 +24,7 @@ public class DiscountCard implements Serializable {
 
     @Column(name = "number")
     @NotNull
-    private String number;
+    private Integer number;
 
     @Column(name = "discount")
     private Integer discount;

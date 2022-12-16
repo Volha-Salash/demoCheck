@@ -1,0 +1,24 @@
+		  $Test shop$
+		 MINSK, NIAMIGA
+		   p.3753787400 
+
+	 cashier: ?1	 date: 2022-12-16
+					 time: 23:42:33
+-----------------------------------------
+Col.	Name		Price	Sum
+1		Cream				1.5	1.5
+2		Wafer				1.0	2.0
+3		Milk				2.5	7.5
+4		Avocado				5.5	22.0
+5		Chicken				3.5	17.5
+1		Bread				1.51	1.51
+2		Cakes				1.78	3.56
+1		Green				2.27	2.27
+5		Tomato				3.53	17.65
+3		Salad				4.78	14.34
+=========================================
+Sum								89.83
+Discount on presented card		5%
+Amount including discount		85.34
+*****************************************
+			Thanks for a purchase!

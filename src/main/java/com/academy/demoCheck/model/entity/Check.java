@@ -1,22 +1,24 @@
 package com.academy.demoCheck.model.entity;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
+import javax.persistence.*;
 import java.io.Serializable;
 
 /**
  * @author : Volha Salash
  */
-
-@Data
+@Entity
+@Getter
+@Setter
+@ToString
 @NoArgsConstructor
+@Table(name="checks")
 public class Check implements Serializable {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     private Integer amount;
 
-    public Check(Integer id, Integer amount) {
-    }
 }

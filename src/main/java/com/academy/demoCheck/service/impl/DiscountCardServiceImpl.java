@@ -1,9 +1,7 @@
 package com.academy.demoCheck.service.impl;
 
-import com.academy.demoCheck.exception.ProductNotFoundException;
 import com.academy.demoCheck.model.entity.DiscountCard;
-import com.academy.demoCheck.model.entity.Product;
-import com.academy.demoCheck.model.repository.DiscountCardRepository;
+import com.academy.demoCheck.repository.DiscountCardRepository;
 import com.academy.demoCheck.service.interfaces.DiscountCardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -25,7 +23,7 @@ public class DiscountCardServiceImpl implements DiscountCardService {
     }
 
     @Override
-    public List<DiscountCard> findByNumber(String number) {
+    public DiscountCard findByNumber(Integer number) {
         return repository.findByNumber(number);
     }
 }
