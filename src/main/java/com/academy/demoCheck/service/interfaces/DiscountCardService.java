@@ -11,6 +11,5 @@ public interface DiscountCardService {
 
     List<DiscountCard> findAll();
 
-    DiscountCard getByNumber(Integer number);
-
+    List<DiscountCard> findByNumber(String number);
 }

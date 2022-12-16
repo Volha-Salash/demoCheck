@@ -9,10 +9,11 @@ CREATE TABLE IF NOT EXISTS product
 
 CREATE TABLE IF NOT EXISTS discount_card
 (
-    id          INTEGER PRIMARY KEY,
-    number      INTEGER UNIQUE NOT NULL,
+    id          SERIAL PRIMARY KEY,
+    number      VARCHAR(64) UNIQUE,
     discount    INTEGER
 );
+
 
 INSERT INTO product (id, name, price, sale) VALUES (1,'Milk', 2.5, 5);
 

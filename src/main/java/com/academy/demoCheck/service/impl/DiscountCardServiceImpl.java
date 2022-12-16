@@ -1,12 +1,13 @@
 package com.academy.demoCheck.service.impl;
 
+import com.academy.demoCheck.exception.ProductNotFoundException;
 import com.academy.demoCheck.model.entity.DiscountCard;
+import com.academy.demoCheck.model.entity.Product;
 import com.academy.demoCheck.model.repository.DiscountCardRepository;
 import com.academy.demoCheck.service.interfaces.DiscountCardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,7 +17,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class DiscountCardServiceImpl implements DiscountCardService {
 
-    private final List<DiscountCard> listOfCards = new ArrayList<>();
     private final DiscountCardRepository repository;
 
     @Override
@@ -25,12 +25,7 @@ public class DiscountCardServiceImpl implements DiscountCardService {
     }
 
     @Override
-    public DiscountCard getByNumber(Integer number) {
-        for (DiscountCard discountCard : listOfCards) {
-            if (number.equals(discountCard.getNumber())) {
-                return discountCard;
-            }
-        }
-        return null;
+    public List<DiscountCard> findByNumber(String number) {
+        return repository.findByNumber(number);
     }
 }

@@ -1,6 +1,8 @@
 package com.academy.demoCheck;
 
+import com.academy.demoCheck.model.entity.DiscountCard;
 import com.academy.demoCheck.model.entity.Product;
+import com.academy.demoCheck.model.repository.DiscountCardRepository;
 import com.academy.demoCheck.model.repository.ProductRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,7 +35,7 @@ public class DemoCheckApplication implements CommandLineRunner {
     }
 
     @Bean
-    public CommandLineRunner demo(ProductRepository repository) {
+    public CommandLineRunner demoProducts(ProductRepository repository) {
         return (args) -> {
             // save a few products
             repository.save(new Product(1, "Cream", 1.5, 2));
@@ -54,14 +56,40 @@ public class DemoCheckApplication implements CommandLineRunner {
             log.info(product.toString());
             log.info("");
 
+        };
 
-            // fetch card by number
-            /*
-            log.info("Card found with findByNumber('4444'):");
+    }
+
+    @Bean
+    public CommandLineRunner demoCards(DiscountCardRepository repository) {
+        return (args) -> {
+            // save a few DiscountCards
+         //   repository.save(new DiscountCard(3, "3234", 2));
+         //   repository.save(new DiscountCard(2, "2234", 2));
+
+            // fetch all DiscountCards
+            log.info("DiscountCards found with findAll():");
+            log.info("-------------------------------");
+            for (DiscountCard cards : repository.findAll()) {
+                log.info(cards.toString());
+            }
+            log.info("");
+
+            // fetch an individual cards by ID
+            Optional<DiscountCard> cards = repository.findById(1);
+            log.info("Card found with findById(1):");
+            log.info("--------------------------------");
+            log.info(cards.toString());
+            log.info("");
+
+
+            // fetch an individual cards by number
+            log.info("DiscountCard found with findByNumber(\"1234\"):");
             log.info("--------------------------------------------");
-            repository.findById(4)
+            for (DiscountCard number : repository.findByNumber("1234")) {
+                log.info(number.toString());
+            }
 
-             */
         };
     }
 

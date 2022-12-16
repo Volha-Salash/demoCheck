@@ -1,5 +1,6 @@
 package com.academy.demoCheck.model.entity;
 
+import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,11 +23,12 @@ public class DiscountCard implements Serializable {
     private Integer id;
 
     @Column(name = "number")
-    private Integer number;
+    @NotNull
+    private String number;
 
     @Column(name = "discount")
     private Integer discount;
 
-    public DiscountCard(Integer id, Integer number, Integer discount) {
+    public DiscountCard(Integer id, String number, Integer discount) {
     }
 }

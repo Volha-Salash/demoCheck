@@ -18,7 +18,7 @@ public class DiscountCardDto implements Serializable {
 
     private Integer id;
 
-    private Integer number;
+    private String number;
 
     private Integer discount;
 
