@@ -1,43 +1,58 @@
 package com.academy.demoCheck;
 
-import com.academy.demoCheck.model.entity.Check;
-import com.academy.demoCheck.repository.CheckRepository;
-import com.academy.demoCheck.repository.DiscountCardRepository;
-import com.academy.demoCheck.repository.ProductRepository;
-import com.academy.demoCheck.service.impl.CheckCreatorImpl;
-import lombok.AccessLevel;
+import com.academy.demoCheck.model.dto.console.CheckConsoleDto;
+import com.academy.demoCheck.model.dto.console.ProductConsoleDto;
+import com.academy.demoCheck.printer.ReceiptPrinter;
 import lombok.RequiredArgsConstructor;
-import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.Bean;
+
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @SpringBootApplication
 @RequiredArgsConstructor
 @Slf4j
-@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
-public class DemoCheckApplication {
+public class DemoCheckApplication implements CommandLineRunner {
 
-    CheckRepository checkRepository;
-
-    DiscountCardRepository cardRepository;
-
-    ProductRepository productRepository;
+    private final ReceiptPrinter receiptPrinter;
 
     public static void main(String[] args) {
         SpringApplication.run(DemoCheckApplication.class, args);
         log.info("APPLICATION FINISHED");
     }
 
+    @Override
+    public void run(String... args) throws Exception {
+        CheckConsoleDto checkDto = new CheckConsoleDto();
+        checkDto.setDiscountCardNumber(parseCard(args));
+        checkDto.setProducts(parseProductList(args));
 
-    @Bean
-    public CommandLineRunner commandLineRunner(ApplicationContext ctx)
-    {
-        CheckCreatorImpl checkCreator = new CheckCreatorImpl(checkRepository, cardRepository, productRepository);
-        return args -> checkCreator.print(2234);
+        receiptPrinter.print(checkDto);
+    }
+
+    private Integer parseCard(String... args) {
+        return Stream.of(args).filter(s -> s.startsWith("card"))
+                .findFirst()
+                .map(s -> Integer.parseInt(s.split("-")[1]))
+                .orElse(null);
+    }
+
+    private ProductConsoleDto parseProduct(String product) {
+        String[] split = product.split("-");
+        ProductConsoleDto productDto = new ProductConsoleDto();
+        productDto.setId(Long.parseLong(split[0]));
+        productDto.setAmount(Integer.parseInt(split[1]));
+        return productDto;
+    }
+
+    private List<ProductConsoleDto> parseProductList(String... args) {
+        return Stream.of(args)
+                .filter(s -> s.matches("\\d+-\\d+"))
+                .map(this::parseProduct)
+                .collect(Collectors.toList());
     }
 }

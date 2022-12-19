@@ -16,11 +16,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 public class ProductDto implements Serializable {
 
-    private Integer id;
+    private Long id;
 
-    private String name;
-
-    private Double price;
-
-    private int sale;
+    private int amount;
 }

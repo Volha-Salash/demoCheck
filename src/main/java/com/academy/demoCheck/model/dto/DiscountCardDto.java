@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 /**
  * @author : Volha Salash
@@ -16,10 +17,10 @@ import java.io.Serializable;
 @AllArgsConstructor
 public class DiscountCardDto implements Serializable {
 
-    private Integer id;
+    private Long id;
 
     private Integer number;
 
-    private Integer discount;
+    private BigDecimal discount;
 
 }

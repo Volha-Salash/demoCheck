@@ -1,7 +1,7 @@
 package com.academy.demoCheck.mapper;
 
 import com.academy.demoCheck.model.dto.CheckDto;
-import com.academy.demoCheck.model.entity.Check;
+import com.academy.demoCheck.model.entity.Receipt;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
@@ -13,7 +13,7 @@ public interface CheckMapper {
 
     CheckMapper INSTANCE = Mappers.getMapper(CheckMapper.class);
 
-    CheckDto toDTO(Check model);
+    CheckDto toDTO(Receipt model);
 
-    Check toModel(CheckDto dto);
+    Receipt toModel(CheckDto dto);
 }

@@ -2,8 +2,9 @@ package com.academy.demoCheck.repository;
 
 import com.academy.demoCheck.model.entity.DiscountCard;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+
+import java.util.Optional;
 
 /**
  * @author : Volha Salash
@@ -11,5 +12,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface DiscountCardRepository extends JpaRepository<DiscountCard, Integer> {
 
-    DiscountCard findByNumber(Integer number);
+    Optional<DiscountCard> findByNumber(Integer number);
 }

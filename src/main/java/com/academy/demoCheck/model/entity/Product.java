@@ -1,38 +1,38 @@
 package com.academy.demoCheck.model.entity;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.Type;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
-
-import static java.sql.Types.NUMERIC;
+import java.math.BigDecimal;
 
 /**
  * @author : Volha Salash
  */
 @Entity
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name="product")
+@Table(name = "product")
 public class Product implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Integer id;
+    private Long id;
 
     @Column(name = "name")
     private String name;
 
     @Column(name = "price",
-            columnDefinition = "NUMERIC(19,0)"
+            columnDefinition = "DECIMAL"
     )
-    private Double price;
+    private BigDecimal price;
 
-    @Column(name = "sale")
-    private int sale;
+    @Column(name = "is_sale")
+    private boolean isSale;
 }

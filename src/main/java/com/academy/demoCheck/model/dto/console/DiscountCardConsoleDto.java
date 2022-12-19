@@ -1,4 +1,4 @@
-package com.academy.demoCheck.model.dto;
+package com.academy.demoCheck.model.dto.console;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 
 /**
  * @author : Volha Salash
@@ -15,10 +14,8 @@ import java.math.BigDecimal;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class CheckDto implements Serializable {
+public class DiscountCardConsoleDto implements Serializable {
 
-    private Long id;
-
-    private BigDecimal amount;
+    private Integer number;
 
 }

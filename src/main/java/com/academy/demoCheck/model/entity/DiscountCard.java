@@ -1,12 +1,12 @@
 package com.academy.demoCheck.model.entity;
 
 import com.sun.istack.NotNull;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 /**
  * @author : Volha Salash
@@ -27,8 +27,8 @@ public class DiscountCard implements Serializable {
     private Integer number;
 
     @Column(name = "discount")
-    private Integer discount;
+    private BigDecimal discount;
 
-    public DiscountCard(Integer id, String number, Integer discount) {
+    public DiscountCard(Long id, Integer number, BigDecimal discount) {
     }
 }
