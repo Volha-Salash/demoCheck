@@ -14,12 +14,6 @@ create table if not exists discount_card
     discount    decimal
 );
 
-create table if not exists  checks
-(
-    id          bigserial primary key,
-    amount      decimal
-);
-
 
 insert into product (id, name, price, is_sale)
 values (1,'Cream', 1.5, true),
@@ -49,6 +43,3 @@ values (1, 1234, 2),
        (3, 3234, 1),
        (4, 4234, 7),
        (5, 5234, 1);
-
-insert into checks (id, amount)
-values (1,1),(2,2),(3,3),(4,4),(5,5),(6,1),(7,2),(8,1),(9,5),(10,3);

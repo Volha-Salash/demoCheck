@@ -27,6 +27,7 @@ public class DemoCheckApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+        args = new String[] {"2-1", "4-5", "1-1", "card-1234"};
         CheckConsoleDto checkDto = new CheckConsoleDto();
         checkDto.setDiscountCardNumber(parseCard(args));
         checkDto.setProducts(parseProductList(args));

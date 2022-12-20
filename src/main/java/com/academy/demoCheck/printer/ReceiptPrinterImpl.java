@@ -1,10 +1,13 @@
 package com.academy.demoCheck.printer;
 
+import com.academy.demoCheck.exception.card.DiscountCardServiceException;
 import com.academy.demoCheck.model.dto.console.CheckConsoleDto;
 import com.academy.demoCheck.model.entity.Receipt;
 import com.academy.demoCheck.service.interfaces.ReceiptService;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Component;
 
 import java.time.format.DateTimeFormatter;
@@ -17,6 +20,7 @@ import java.time.format.DateTimeFormatter;
 public class ReceiptPrinterImpl implements ReceiptPrinter {
 
     private final ReceiptService receiptService;
+    private final MessageSource messageSource;
 
     @SneakyThrows
     public void print(CheckConsoleDto checkDto) {
@@ -39,7 +43,7 @@ public class ReceiptPrinterImpl implements ReceiptPrinter {
         String time = "TIME: %s";
         System.out.println(String.format(time, receipt.getTime().format(DateTimeFormatter.ofPattern("HH:mm:ss"))));
         System.out.println(delimiter);
-        String productLine = "%-3s%-27s%10s%10s%10s";
+        String productLine = "%-4s%-26s%10s%10s%10s";
         System.out.println(String.format(productLine, "QTY", "NAME", "PRICE", "DISC", "TOTAL"));
         receipt.getProducts().forEach(receiptProduct ->
                 System.out.println(String.format(productLine, receiptProduct.getAmount(),
@@ -47,8 +51,13 @@ public class ReceiptPrinterImpl implements ReceiptPrinter {
                         receiptProduct.getDiscountSum(), receiptProduct.getTotalSumWithDiscount())));
         System.out.println(delimiter);
         String totalLine = "%-50s%10s";
-        if (receipt.getDiscountCard() != null) {
-            System.out.println(String.format(totalLine, "Discount card", receipt.getDiscountCard().getNumber()));
+        try {
+            if (receipt.getDiscountCard() != null) {
+                System.out.println(String.format(totalLine, "Discount card", receipt.getDiscountCard().getNumber()));
+            }
+        } catch (DiscountCardServiceException e) {
+            throw new DiscountCardServiceException(messageSource.getMessage("msg.error.card.find.by.number", null,
+                    LocaleContextHolder.getLocale()));
         }
         System.out.println(delimiter);
         System.out.println(String.format(totalLine, "Price without discount", receipt.getTotalSum()));
