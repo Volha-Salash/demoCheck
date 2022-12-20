@@ -1,5 +1,6 @@
 package com.academy.demoCheck.service.impl;
 
+import com.academy.demoCheck.exception.product.ProductServiceException;
 import com.academy.demoCheck.model.dto.console.CheckConsoleDto;
 import com.academy.demoCheck.model.dto.console.ProductConsoleDto;
 import com.academy.demoCheck.model.entity.DiscountCard;
@@ -8,8 +9,11 @@ import com.academy.demoCheck.model.entity.ReceiptProduct;
 import com.academy.demoCheck.repository.DiscountCardRepository;
 import com.academy.demoCheck.repository.ProductRepository;
 import com.academy.demoCheck.service.interfaces.ReceiptService;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -28,8 +32,8 @@ import java.util.Optional;
 public class ReceiptServiceImpl implements ReceiptService {
 
     private final DiscountCardRepository discountCardRepository;
-
     private final ProductRepository productRepository;
+    private final MessageSource messageSource;
 
     @Override
     public Receipt createReceipt(CheckConsoleDto checkDto) {
@@ -43,13 +47,18 @@ public class ReceiptServiceImpl implements ReceiptService {
         List<ReceiptProduct> productList = new ArrayList<>();
 
         for (ProductConsoleDto productDto : checkDto.getProducts()) {
-            productRepository.findById(productDto.getId()).ifPresent(product -> {
-                ReceiptProduct receiptProduct = new ReceiptProduct();
-                receiptProduct.setProduct(product);
-                receiptProduct.setAmount(productDto.getAmount());
-                receiptProduct.setDiscountSum(BigDecimal.ZERO);
-                productList.add(receiptProduct);
-            });
+            try {
+                productRepository.findById(productDto.getId()).ifPresent(product -> {
+                    ReceiptProduct receiptProduct = new ReceiptProduct();
+                    receiptProduct.setProduct(product);
+                    receiptProduct.setAmount(productDto.getAmount());
+                    receiptProduct.setDiscountSum(BigDecimal.ZERO);
+                    productList.add(receiptProduct);
+                });
+            } catch (ProductServiceException e) {
+                throw new ProductServiceException (messageSource.getMessage("msg.error.product.find.by.id", null,
+                        LocaleContextHolder.getLocale()));
+            }
         }
 
         productList.forEach(receiptProduct -> receiptProduct
