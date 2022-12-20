@@ -52,9 +52,9 @@ gradle clean build -x test
 ![gradle](./documentation/png/gradleBuild.png)
 
 ---
-###2) Run DemoCheckApplication
+### 2) Run DemoCheckApplication
 
-1)Run method main() 
+1)Run method main() in 
 src/main/java/com/academy/demoCheck/DemoCheckApplication.java.main()
 
 2)you can change these parameters of the check in the method run() {"2-1", "4-5", "1-1", "card-1234"};
@@ -62,7 +62,7 @@ src/main/java/com/academy/demoCheck/DemoCheckApplication.java.main()
 ![main](./documentation/png/main.png)
 ---
 
-###Run with Terminal
+### You can Run with Terminal
 for example
 >C:\{path}\demoCheck\build\libs>java -jar demoCheck-0.0.1-SNAPSHOT.jar 3-1 2-5 5-1 card-1234
 
