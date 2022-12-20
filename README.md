@@ -49,7 +49,7 @@ database connection settings in application.properties
 ```console
 gradle clean build -x test
 ```
-![gradle](./documentation/png/gradle build.png)
+![gradle](./documentation/png/gradleBuild.png)
 
 ---
 ###2) Run DemoCheckApplication
